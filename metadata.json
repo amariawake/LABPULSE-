@@ -1,0 +1,6 @@
+{
+  "name": "LabPulse Laboratory Workstation",
+  "description": "An enterprise laboratory platform for HPLC, UHPLC, and GC chromatography monitoring, instrument health, sample queue management, and digital twins.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
