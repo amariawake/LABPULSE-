@@ -102,6 +102,8 @@ interface LabContextType {
 
 const LabContext = createContext<LabContextType | undefined>(undefined);
 
+const generateUniqueId = (prefix: string) => `${prefix}-${Date.now()}-${Math.floor(Math.random() * 100000000)}`;
+
 function getSignalAtTime(type: InstrumentType, time: number): number {
   const peaks = METHOD_PEAKS[type] || [];
   const drift = Math.sin(time * 0.4) * 1.5 + time * 0.15;
@@ -288,7 +290,7 @@ export function LabProvider({ children }: { children: ReactNode }) {
                 
                 setNotifications(nPrev => [
                   {
-                    id: `not-${Date.now()}`,
+                    id: generateUniqueId('not'),
                     timestamp: new Date().toLocaleTimeString(),
                     type: 'SUCCESS',
                     title: notificationTitle,
@@ -302,7 +304,7 @@ export function LabProvider({ children }: { children: ReactNode }) {
                 // Add compliance audit log
                 setAuditLogs(alPrev => [
                   {
-                    id: `aud-${Date.now()}`,
+                    id: generateUniqueId('aud'),
                     timestamp: new Date().toLocaleTimeString(),
                     operator: 'System Automaton',
                     action: 'In-Silico Run Completed',
@@ -372,7 +374,7 @@ export function LabProvider({ children }: { children: ReactNode }) {
 
   // 2. Action Implementations
   const registerInstrument = (inst: Omit<Instrument, 'id' | 'sensorData' | 'status' | 'healthScore'>) => {
-    const newId = `inst-${Date.now()}`;
+    const newId = generateUniqueId('inst');
     const newInstrument: Instrument = {
       ...inst,
       id: newId,
@@ -390,7 +392,7 @@ export function LabProvider({ children }: { children: ReactNode }) {
   };
 
   const addSample = (sample: Omit<Sample, 'id' | 'registeredDate' | 'chainOfCustody' | 'status'>) => {
-    const newId = `samp-${Date.now()}`;
+    const newId = generateUniqueId('samp');
     const barcode = `LAB-2026-${Math.floor(100000 + Math.random() * 900000)}`;
     const newSample: Sample = {
       ...sample,
@@ -438,7 +440,7 @@ export function LabProvider({ children }: { children: ReactNode }) {
 
           setNotifications(nPrev => [
             {
-              id: `not-${Date.now()}`,
+              id: generateUniqueId('not'),
               timestamp: new Date().toLocaleTimeString(),
               type: 'INFO',
               title: 'Workstation Injecting',
@@ -472,7 +474,7 @@ export function LabProvider({ children }: { children: ReactNode }) {
   };
 
   const addMethod = (method: Omit<Method, 'id' | 'status' | 'history'>) => {
-    const newId = `met-${Date.now()}`;
+    const newId = generateUniqueId('met');
     const newMethod: Method = {
       ...method,
       id: newId,
@@ -505,7 +507,7 @@ export function LabProvider({ children }: { children: ReactNode }) {
   };
 
   const addMaintenanceRecord = (maint: Omit<MaintenanceRecord, 'id'>) => {
-    const newId = `maint-${Date.now()}`;
+    const newId = generateUniqueId('maint');
     const newRecord: MaintenanceRecord = { ...maint, id: newId };
     setMaintenance(prev => [newRecord, ...prev]);
     
@@ -526,7 +528,7 @@ export function LabProvider({ children }: { children: ReactNode }) {
   };
 
   const addReservation = (res: Omit<Reservation, 'id'>) => {
-    const newId = `res-${Date.now()}`;
+    const newId = generateUniqueId('res');
     setReservations(prev => [...prev, { ...res, id: newId }]);
     addAuditLog('SYSTEM', 'Calendar Reservation', `Reserved instrument ID ${res.instrumentId} for ${res.title}`);
   };
@@ -556,7 +558,7 @@ export function LabProvider({ children }: { children: ReactNode }) {
 
   const addAuditLog = (category: AuditLog['category'], action: string, details: string) => {
     const newLog: AuditLog = {
-      id: `aud-${Date.now()}`,
+      id: generateUniqueId('aud'),
       timestamp: new Date().toLocaleTimeString(),
       operator: userEmail,
       action,
