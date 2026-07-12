@@ -199,7 +199,9 @@ export function LabProvider({ children }: { children: ReactNode }) {
   // Generate some initially completed runs
   useEffect(() => {
     const run1 = generateCompletedRun('samp-04', 'inst-01', 'met-01');
-    setCompletedRuns([run1]);
+    const run2 = generateCompletedRun('samp-02', 'inst-01', 'met-01');
+    const run3 = generateCompletedRun('samp-05', 'inst-03', 'met-03');
+    setCompletedRuns([run1, run2, run3]);
   }, []);
 
   // 1. Core WebSocket Simulation Loop (Updates every second)

@@ -231,14 +231,15 @@ export const INITIAL_SAMPLES: Sample[] = [
     priority: 'MEDIUM',
     assignedMethodId: 'met-01',
     assignedInstrumentId: 'inst-01',
-    status: 'PENDING',
+    status: 'COMPLETED',
     injectionVolume: 20.0,
     dilutionFactor: 50,
     vialPosition: 'A-02',
     registeredDate: '2026-07-12 08:15',
     chainOfCustody: [
       { timestamp: '2026-07-12 08:15', action: 'Sample Logged from Stability Chambers', operator: 'Marcus Chen' },
-      { timestamp: '2026-07-12 08:45', action: 'Standards and QC Prepared', operator: 'Marcus Chen' }
+      { timestamp: '2026-07-12 08:45', action: 'Standards and QC Prepared', operator: 'Marcus Chen' },
+      { timestamp: '2026-07-12 11:15', action: 'Injection Completed & Peaks Integrated', operator: 'Agilent 1260' }
     ]
   },
   {
@@ -282,13 +283,14 @@ export const INITIAL_SAMPLES: Sample[] = [
     priority: 'HIGH',
     assignedMethodId: 'met-03',
     assignedInstrumentId: 'inst-03',
-    status: 'PENDING',
+    status: 'COMPLETED',
     injectionVolume: 1.0,
     dilutionFactor: 1,
     vialPosition: 'G-01',
     registeredDate: '2026-07-12 07:00',
     chainOfCustody: [
-      { timestamp: '2026-07-12 07:00', action: 'Calibration Stock Logged', operator: 'Sarah Jenkins' }
+      { timestamp: '2026-07-12 07:00', action: 'Calibration Stock Logged', operator: 'Sarah Jenkins' },
+      { timestamp: '2026-07-12 08:30', action: 'GC FID Column Injection Completed', operator: 'Shimadzu GC' }
     ]
   },
   {
